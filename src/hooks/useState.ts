@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
 
-export const emptyData = {
+export const emptyData: any = {
   userId: "",
   picURL: "",
   nickname: "",
@@ -63,7 +63,7 @@ export function useInit() {
   }, []);
 }
 
-export function useGetState() {
+/* export function useGetState() {
   const data = useRecoilValue(getDataState);
 
   return data;
@@ -75,4 +75,4 @@ export function useSetState(newState) {
     setData({ ...data, ...newState });
     localStorage.setItem("saved-state", JSON.stringify(data));
   }, [newState]);
-}
+} */

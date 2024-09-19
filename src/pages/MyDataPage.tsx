@@ -3,8 +3,12 @@ import { ButtonComp } from "../components/ButtonComp";
 import "./my-data-page.css";
 import blankProfilePic from "../resources/blank-profile-picture.png";
 import { Link } from "react-router-dom";
+import { getDataSelector } from "../atoms/data-atom";
+import { useRecoilValue } from "recoil";
 
 export function MyDataPage(props) {
+  const userData = useRecoilValue(getDataSelector);
+
   return (
     <div className="general-container">
       <h1 className="data-main-title">Mis datos</h1>
@@ -12,21 +16,21 @@ export function MyDataPage(props) {
         <center>
           <img
             className="profile-pic-field"
-            src={blankProfilePic}
+            src={userData.picURL}
             alt="profile-pic-field"
           />
         </center>
         <p className="name-field">
-          NICK: <span className="name-span">Ejemplo</span>
+          NICK: <span className="name-span">{userData.nickname}</span>
         </p>
         <p className="email-field">
-          EMAIL: <span className="email-span">Ejemplo</span>
+          EMAIL: <span className="email-span">{userData.email}</span>
         </p>
         <p className="address-field">
-          DIRECCIÓN: <span className="location-span">Ejemplo</span>
+          DIRECCIÓN: <span className="location-span">{userData.address}</span>
         </p>
         <p className="location-field">
-          LOCALIDAD: <span className="location-span">Ejemplo</span>
+          LOCALIDAD: <span className="location-span">{userData.location}</span>
         </p>
       </div>
       <div className="options-container">

@@ -3,11 +3,15 @@ import { ButtonComp } from "../components/ButtonComp";
 import pinMap from "../resources/pin-map.png";
 import "./home-page.css";
 import { Link } from "react-router-dom";
+import { getDataSelector } from "../atoms/data-atom";
+import { useRecoilValue } from "recoil";
 
 export function HomePage(props) {
+  const userData = useRecoilValue(getDataSelector);
+
   return (
     <div className="general-container">
-      <h1 className="home-main-title">Bienvenido Ejemplo</h1>
+      <h1 className="home-main-title">Bienvenido {userData.nickname}</h1>
       <Link to="/my-data" className="button-01">
         <ButtonComp color="#ff7f87" textContent="Mis datos" />
       </Link>
@@ -21,7 +25,13 @@ export function HomePage(props) {
         <img
           className="small-map"
           alt=""
-          src="https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/-58.3966493,-34.7296406,14,0.00,0.00/310x190@2x?access_token=pk.eyJ1Ijoibmljb2xhc2Nhc211eiIsImEiOiJjbGlmYjFjZTQwbXk3M2Zwa3VrdGtha2g1In0.HuBxvL_9t1URB93rFefxfg"
+          src={
+            "https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/" +
+            userData.lng +
+            "," +
+            userData.lat +
+            ",14,0.00,0.00/310x190@2x?access_token=pk.eyJ1Ijoibmljb2xhc2Nhc211eiIsImEiOiJjbGlmYjFjZTQwbXk3M2Zwa3VrdGtha2g1In0.HuBxvL_9t1URB93rFefxfg"
+          }
         />
         <img className="pin-map" src={pinMap} alt="test-map" />
       </div>

@@ -30,9 +30,9 @@ export function HeaderMenuComp(props) {
       </label>
       <ul className="header__menu-lista">
         <li>
-          <a href="/home" className="header__option">
+          <Link to="/home" className="header__option">
             Inicio
-          </a>
+          </Link>
           <a href="/my-data" className="header__option">
             Mis datos
           </a>

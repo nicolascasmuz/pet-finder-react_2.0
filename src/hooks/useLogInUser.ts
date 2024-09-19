@@ -1,45 +1,39 @@
 import { useEffect } from "react";
-import {
-  atom,
-  selector,
-  useSetRecoilState,
-  useRecoilValue,
-  useRecoilCallback,
-} from "recoil";
-/* import { emailPassState, logInState } from "../atoms/log-in-atoms"; */
-import { logInUserSelector } from "../atoms/new-atoms";
-
-/* export function useLogIn(email?, password?) {
-  const setRecoilLogIn = useSetRecoilState(logInState);
-  const logInData = useRecoilValue(logInDataState);
-  useSetState(logInData);
-
-  useEffect(() => {
-    if (email && password) {
-      setRecoilLogIn({ email, password });
-    }
-  }, [email, password]);
-
-  return logInData;
-} */
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { dataAtom, dataSelector } from "../atoms/data-atom";
+import { authAtom, authSelector } from "../atoms/new-login-atoms";
 
 /* function useLogInUser(email?, password?) {
-  const setEmailPassState = useSetRecoilState(emailPassState);
-  const profileData = useRecoilValue(logInState);
+  const setEmailPassState = useSetRecoilState(authAtom);
+  const profileData = useRecoilValue(loginToken);
 
   useEffect(() => {
     setEmailPassState({ email, password });
   }, [email, password]);
 
   return profileData;
+} */
+
+function useLogInUser() {
+  const navigate = useNavigate();
+  const setAuthDataState = useSetRecoilState(authAtom);
+  const setDataState = useSetRecoilState(dataAtom);
+  const userData = useRecoilValue(authSelector);
+  const stateData = useRecoilValue(dataSelector);
+
+  async function logIn(email: string, password: string) {
+    setAuthDataState({ email, password });
+    setDataState(userData);
+    console.log("useLogInUser: ", stateData);
+    if (userData) {
+      navigate("/home");
+    }
+
+    return userData;
+  }
+
+  return logIn;
 }
 
-export { useLogInUser }; */
-
-export const useLogInUser = () => {
-  const logInUser = useSetRecoilState(logInUserSelector);
-
-  return async (email: string, password: string) => {
-    await logInUser({ email, password });
-  };
-};
+export { useLogInUser };

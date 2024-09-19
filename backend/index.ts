@@ -35,13 +35,7 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.json({ limit: "50mb" }));
-app.use(
-  cors({
-    origin: "http://localhost:3000", // Permitir solo el frontend
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true, // Permitir credenciales (cookies, encabezados de autorización)
-  })
-);
+app.use(cors());
 
 /* sequelize.sync({ alter: true }).then((res) => {
   console.log(res);
