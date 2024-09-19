@@ -3,15 +3,34 @@ import { ButtonComp } from "../components/ButtonComp";
 import { FormInputComp } from "../components/FormInputComp";
 import "./sign-up-page.css";
 import { Link } from "react-router-dom";
+import { useSignUpUser } from "../hooks/useSignUpUser";
 
-export function SignUpPage(props) {
+export function SignUpPage() {
+  const signUp = useSignUpUser();
+
+  const HandleLogIn = async (e) => {
+    e.preventDefault();
+
+    const emailValue = e.target.email.value;
+    const passValue = e.target.pass.value;
+    const checkpassValue = e.target.checkpass.value;
+
+    if (passValue === checkpassValue) {
+      try {
+        await signUp(emailValue, passValue);
+      } catch (error) {
+        console.error("Error al iniciar sesión: ", error);
+      }
+    }
+  };
+
   return (
     <div className="general-container">
       <h1 className="sign-up-main-title">Registrarse</h1>
       <p className="paragraph-01">
         Ingresá los siguientes datos para realizar el registro
       </p>
-      <form className="signup-form">
+      <form className="signup-form" onSubmit={HandleLogIn}>
         <FormInputComp
           className="input1"
           type="email"

@@ -2,11 +2,10 @@ import React from "react";
 import { ButtonComp } from "../components/ButtonComp";
 import { FormInputComp } from "../components/FormInputComp";
 import "./log-in-page.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useLogInUser } from "../hooks/useLogInUser";
 
 export function LogInPage() {
-  const navigate = useNavigate();
   const logIn = useLogInUser();
 
   const HandleLogIn = async (e) => {

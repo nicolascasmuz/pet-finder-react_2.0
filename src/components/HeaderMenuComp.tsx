@@ -33,21 +33,21 @@ export function HeaderMenuComp(props) {
           <Link to="/home" className="header__option">
             Inicio
           </Link>
-          <a href="/my-data" className="header__option">
+          <Link to="/my-data" className="header__option">
             Mis datos
-          </a>
-          <a href="/reported-pets" className="header__option">
+          </Link>
+          <Link to="/reported-pets" className="header__option">
             Mascotas reportadas
-          </a>
-          <a href="/new-report" className="header__option">
+          </Link>
+          <Link to="/new-report" className="header__option">
             Reportar mascota
-          </a>
-          <a href="/map" className="header__option">
+          </Link>
+          <Link to="/map" className="header__option">
             Mapa
-          </a>
-          <a href="/main" className="header__option-log-out">
+          </Link>
+          <Link to="/main" className="header__option">
             Cerrar sesión
-          </a>
+          </Link>
         </li>
       </ul>
     </header>
