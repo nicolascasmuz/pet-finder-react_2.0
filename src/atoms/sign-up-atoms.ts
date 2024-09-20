@@ -30,9 +30,10 @@ const signinSelector = selector({
       });
       const json = await response.json();
       const data = json.profile;
+      console.log("data selector: ", data);
       return data;
     } else {
-      return "usuario existente";
+      return "no funciona";
     }
   },
 });
