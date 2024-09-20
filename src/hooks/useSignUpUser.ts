@@ -10,7 +10,7 @@ function useSignUpUser() {
   async function signUp(email: string, password: string) {
     setAuthDataState({ email, password });
     console.log("useSignUpUser: ", userData);
-    if (userData.createdUser == true) {
+    if (userData == true) {
       navigate("/location");
     }
 

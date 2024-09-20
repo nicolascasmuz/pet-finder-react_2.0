@@ -29,7 +29,7 @@ const signinSelector = selector({
         }),
       });
       const json = await response.json();
-      const data = json.profile;
+      const data = json.createdUser;
       console.log("data selector: ", data);
       return data;
     } else {
