@@ -3,10 +3,10 @@ import { ButtonComp } from "../components/ButtonComp";
 import { FormInputComp } from "../components/FormInputComp";
 import "./sign-up-page.css";
 import { Link } from "react-router-dom";
-import { useSignUpUser } from "../hooks/useSignUpUser";
+import { useSignUp } from "../hooks/useSignUp";
 
 export function SignUpPage() {
-  const signUp = useSignUpUser();
+  const signUp = useSignUp();
 
   const HandleLogIn = async (e) => {
     e.preventDefault();

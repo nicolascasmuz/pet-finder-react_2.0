@@ -1,18 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { ButtonComp } from "../components/ButtonComp";
 import { FormInputComp } from "../components/FormInputComp";
-import mapboxgl from "mapbox-gl";
-import MapboxClient from "mapbox";
 import getLocationImg from "../resources/get-location_1@2x.png";
 import "./location-page.css";
+import { useSetProfile } from "../hooks/useSetProfile";
 
-/* const MAPBOX_TOKEN =
-  "pk.eyJ1Ijoibmljb2xhc2Nhc211eiIsImEiOiJjbGlnazg2cjExZTdvM21tcWl6eGU5bDM0In0.EtaC4N7nb_NuwfddaKZaow";
-mapboxgl.accessToken = MAPBOX_TOKEN;
-const mapboxClient = new MapboxClient(MAPBOX_TOKEN); */
+export function LocationPage() {
+  const setProfile = useSetProfile();
 
-export function LocationPage(props) {
+  const HandleSubmit = async (e) => {
+    e.preventDefault();
+
+    const addressValue = e.target.address.value;
+    const townValue = e.target.town.value;
+
+    try {
+      await setProfile(addressValue, townValue);
+    } catch (error) {
+      console.error("LocationPage Error: ", error);
+    }
+  };
+
   return (
     <div className="general-container">
       <img
@@ -20,7 +28,7 @@ export function LocationPage(props) {
         src={getLocationImg}
         alt="main-page-picture"
       />
-      <form className="location-form">
+      <form className="location-form" onSubmit={HandleSubmit}>
         <FormInputComp
           className="input1"
           type="text"

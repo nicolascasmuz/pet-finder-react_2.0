@@ -1,4 +1,4 @@
-import { atom, selector, useSetRecoilState } from "recoil";
+import { atom, selector } from "recoil";
 const API_BASE_URL = "http://localhost:3000";
 
 const signinAtom = atom({
@@ -13,10 +13,7 @@ const signinSelector = selector({
   key: "signin-selector",
   get: async ({ get }) => {
     const emailPassValues = get(signinAtom);
-    console.log("signinSelector: ", {
-      email: emailPassValues.email,
-      password: emailPassValues.password,
-    });
+
     if (emailPassValues.email && emailPassValues.password) {
       const response = await fetch(API_BASE_URL + "/sign-up", {
         method: "post",
@@ -30,10 +27,10 @@ const signinSelector = selector({
       });
       const json = await response.json();
       const data = json.createdUser;
-      console.log("data selector: ", data);
-      return data;
+
+      return { data, emailPassValues };
     } else {
-      return "no funciona";
+      return false;
     }
   },
 });

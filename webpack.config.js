@@ -32,6 +32,9 @@ module.exports = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
+    alias: {
+      querystring: "querystring-es3",
+    },
   },
   output: {
     path: path.resolve(__dirname, "dist"),

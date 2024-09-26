@@ -1,6 +1,6 @@
-import { atom, selector, useSetRecoilState } from "recoil";
+import { atom, selector } from "recoil";
 
-export const emptyData: any = {
+const emptyData: any = {
   userId: "",
   picURL: "",
   nickname: "",
@@ -16,8 +16,8 @@ export const emptyData: any = {
   myReportedPets: [],
 };
 
-export const dataAtom = atom({
-  key: "profileAtom",
+const dataAtom = atom({
+  key: "data-atom",
   default: {
     userId: "",
     picURL: "",
@@ -35,8 +35,8 @@ export const dataAtom = atom({
   },
 });
 
-export const getDataSelector = selector({
-  key: "dataSelector",
+const getDataSelector = selector({
+  key: "get-data-selector",
   get: async ({ get }) => {
     const dataValue = get(dataAtom);
 
@@ -44,7 +44,7 @@ export const getDataSelector = selector({
   },
 });
 
-export function useInit() {
+function useInit() {
   const localData = localStorage.getItem("saved-state");
   console.log("localData: ", localData);
 
@@ -66,7 +66,7 @@ export function useInit() {
   }
 }
 
-export const dataSelector = selector({
+const dataSelector = selector({
   key: "data-selector",
   get: async ({ get }) => {
     const userProfile = get(dataAtom);
@@ -76,8 +76,4 @@ export const dataSelector = selector({
   },
 });
 
-/* export function useGetState() {
-  const data = useRecoilValue(getDataSelector);
-
-  return data;
-} */
+export { emptyData, dataAtom, getDataSelector, useInit, dataSelector };

@@ -28,6 +28,10 @@ export const indexRouter = createBrowserRouter([
         element: <MainPage />,
       },
       {
+        path: "/main",
+        element: <MainPage />,
+      },
+      {
         path: "/log-in",
         element: <LogInPage />,
       },
