@@ -58,6 +58,8 @@ app.post("/create-profile", async (req, res) => {
   const email = req.headers.authorization.split(" ")[1];
   const password = req.headers.authorization.split(" ")[2];
   const { lat, lng, address, location } = req.body;
+  console.log("index (req.body): ", req.body);
+  console.log("index (req.headers.authorization): ", req.headers.authorization);
 
   const foundAuth = await findOneAuth(req.headers.authorization);
 

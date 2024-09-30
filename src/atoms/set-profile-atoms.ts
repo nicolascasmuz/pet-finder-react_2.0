@@ -17,8 +17,11 @@ const profileSelector = selector({
   key: "profile-selector",
   get: async ({ get }) => {
     const profileData = get(profileAtom);
+    console.log("set-profile-atoms (profileData): ", profileData);
 
-    if (profileData) {
+    if (profileData.email == "" && profileData.password == "") {
+      return false;
+    } else {
       const response = await fetch(API_BASE_URL + "/create-profile", {
         method: "post",
         headers: {
@@ -30,10 +33,9 @@ const profileSelector = selector({
       });
       const json = await response.json();
       const data = await json.newProfile;
+      console.log("set-profile-atoms (data): ", data);
 
       return data;
-    } else {
-      return false;
     }
   },
 });

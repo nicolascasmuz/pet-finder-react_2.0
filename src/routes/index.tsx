@@ -8,6 +8,7 @@ import { SignUpPage } from "../pages/SignUpPage";
 import { LocationPage } from "../pages/LocationPage";
 import { HomePage } from "../pages/HomePage";
 import { MyDataPage } from "../pages/MyDataPage";
+import { EditPicPage } from "../pages/EditPicPage";
 import { EditDataPage } from "../pages/EditDataPage";
 import { EditPassPage } from "../pages/EditPassPage";
 import { ReportedPetsPage } from "../pages/ReportedPetsPage";
@@ -50,6 +51,10 @@ export const indexRouter = createBrowserRouter([
       {
         path: "/my-data",
         element: <MyDataPage />,
+      },
+      {
+        path: "/edit-pic",
+        element: <EditPicPage />,
       },
       {
         path: "/edit-data",

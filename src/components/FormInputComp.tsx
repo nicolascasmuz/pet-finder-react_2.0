@@ -9,8 +9,9 @@ export function FormInputComp(props) {
         className="form-input__input"
         type={props.type}
         name={props.name}
-        placeholder={props.placeholder}
         value={props.value}
+        placeholder={props.placeholder}
+        onChange={props.onChange}
       />
     </label>
   );

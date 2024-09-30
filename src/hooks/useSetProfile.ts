@@ -22,34 +22,13 @@ function useSetProfile() {
   const setDataState = useSetRecoilState(dataAtom);
   const stateData = useRecoilValue(dataSelector);
 
-  const emptyData: any = {
-    userId: "",
-    picURL: "",
-    nickname: "",
-    email: "",
-    password: "",
-    address: "",
-    location: "",
-    lat: "",
-    lng: "",
-    newUser: "",
-    selectedPet: "",
-    petsByRadius: [],
-    myReportedPets: [],
-  };
-
   useEffect(() => {
     if (
       profileDataLoadable.state === "hasValue" &&
       profileDataLoadable.contents
     ) {
-      emptyData.email = profileDataLoadable.contents.email;
-      emptyData.password = profileDataLoadable.contents.password;
-      emptyData.address = profileDataLoadable.contents.address;
-      emptyData.location = profileDataLoadable.contents.location;
-      emptyData.lat = profileDataLoadable.contents.lat;
-      emptyData.lng = profileDataLoadable.contents.lng;
-      setDataState(emptyData);
+      console.log("useSetProfile (profileDataLoadable): ", profileDataLoadable);
+      setDataState(profileDataLoadable.contents);
       navigate("/home");
     }
   }, [profileDataLoadable, navigate]);
@@ -80,6 +59,8 @@ function useSetProfile() {
             lat,
             lng,
           };
+
+          console.log("useSetProfile (setProfileData): ", setProfileData);
           setProfileDataState(setProfileData);
         }
       }
