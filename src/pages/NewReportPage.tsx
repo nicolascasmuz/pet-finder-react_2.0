@@ -5,7 +5,7 @@ import "./new-report-page.css";
 import uploadPic from "../resources/upload-pic.png";
 import pinMap from "../resources/pin-map.png";
 
-export function NewReportPage(props) {
+export function NewReportPage() {
   return (
     <div className="general-container">
       <h1 className="new-report-main-title">Reportar mascota</h1>
