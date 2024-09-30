@@ -1,6 +1,9 @@
 import { Profile } from "../models/profile";
+import { Auth } from "../models/auth";
+import { User } from "../models/user";
 import { cloudinary } from "../lib/cloudinary";
 import { getSHA256ofString } from "../lib/sha256";
+import { profilesIndex } from "../lib/algolia";
 
 export async function updateProfile(userId, updatedProfile) {
   if (updatedProfile.nickname) {
@@ -11,21 +14,45 @@ export async function updateProfile(userId, updatedProfile) {
       height: 500,
     });
 
-    const dataToUpdate = {
+    const dataToUpdateProfile = {
       picURL: img.secure_url,
       nickname: updatedProfile.nickname,
       email: updatedProfile.email,
       address: updatedProfile.address,
       location: updatedProfile.location,
     };
+    const dataToUpdateAuth = {
+      email: updatedProfile.email,
+    };
+    const dataToUpdateUser = {
+      email: updatedProfile.email,
+    };
 
-    await Profile.update(dataToUpdate, {
+    await Profile.update(dataToUpdateProfile, {
+      where: {
+        id: userId,
+      },
+    });
+    await Auth.update(dataToUpdateAuth, {
+      where: {
+        id: userId,
+      },
+    });
+    await User.update(dataToUpdateUser, {
       where: {
         id: userId,
       },
     });
 
-    return dataToUpdate;
+    await profilesIndex
+      .partialUpdateObject({
+        objectID: userId,
+        email: updatedProfile.email,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+
+    return dataToUpdateProfile;
   }
 }
 

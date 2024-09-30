@@ -1,13 +1,13 @@
 import React from "react";
 import { ButtonComp } from "../components/ButtonComp";
 import pinMap from "../resources/pin-map.png";
-import "./home-page.css";
 import { Link } from "react-router-dom";
-import { getDataSelector } from "../atoms/data-atom";
+import { dataSelector } from "../atoms/data-atom";
 import { useRecoilValue } from "recoil";
+import "./home-page.css";
 
-export function HomePage(props) {
-  const userData = useRecoilValue(getDataSelector);
+export function HomePage() {
+  const userData = useRecoilValue(dataSelector);
 
   return (
     <div className="general-container">

@@ -20,7 +20,7 @@ const profileSelector = selector({
     console.log("set-profile-atoms (profileData): ", profileData);
 
     if (profileData.email == "" && profileData.password == "") {
-      return null;
+      return false;
     } else {
       const response = await fetch(API_BASE_URL + "/create-profile", {
         method: "post",

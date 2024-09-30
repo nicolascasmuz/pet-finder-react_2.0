@@ -1,13 +1,12 @@
 import React from "react";
 import { ButtonComp } from "../components/ButtonComp";
-import "./my-data-page.css";
-import blankProfilePic from "../resources/blank-profile-picture.png";
 import { Link } from "react-router-dom";
-import { getDataSelector } from "../atoms/data-atom";
+import { dataSelector } from "../atoms/data-atom";
 import { useRecoilValue } from "recoil";
+import "./my-data-page.css";
 
-export function MyDataPage(props) {
-  const userData = useRecoilValue(getDataSelector);
+export function MyDataPage() {
+  const userData = useRecoilValue(dataSelector);
 
   return (
     <div className="general-container">
@@ -34,6 +33,9 @@ export function MyDataPage(props) {
         </p>
       </div>
       <div className="options-container">
+        <Link to="/edit-pic" className="button-datos">
+          <ButtonComp color="#ff7f87" textContent="Cambiar foto" />
+        </Link>
         <Link to="/edit-data" className="button-datos">
           <ButtonComp color="#ff7f87" textContent="Modificar datos" />
         </Link>
