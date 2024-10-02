@@ -1,45 +1,29 @@
 import React from "react";
 import { FoundPetCardComp } from "../components/FoundPetCardComp";
 import { ReportedPetCardComp } from "../components/ReportedPetCardComp";
+import { useReportedPets } from "../hooks/useReportedPets";
 import "./reported-pets-page.css";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { dataSelector } from "../atoms/data-atom";
+import { useRecoilValue } from "recoil";
 
-export function ReportedPetsPage(props) {
-  const myReportedPets = [
-    {
-      id: 3,
-      picURL:
-        "https://res.cloudinary.com/dbgjrxaqf/image/upload/v1693689353/xzgq4y7vf3ow98txzbus.jpg",
-      name: "Leoncia",
-      details: "Está castrada y tiene una chapita con su nombre",
-      found: true,
-      lat: -34.6991734203197,
-      lng: -58.3947083728498,
-      createdAt: "2023-09-02T21:15:57.316Z",
-      updatedAt: "2023-09-02T21:15:57.316Z",
-      userId: 1,
-    },
-    {
-      id: 2,
-      picURL:
-        "https://res.cloudinary.com/dbgjrxaqf/image/upload/v1696547154/mi47c72cetofrffvlwuu.jpg",
-      name: "Billy",
-      details: "La última vez lo vieron por Monte Chingolo.",
-      found: false,
-      lat: -34.7337248553531,
-      lng: -58.3496177588717,
-      createdAt: "2023-09-02T21:06:59.620Z",
-      updatedAt: "2023-10-05T23:06:03.154Z",
-      userId: 1,
-    },
-  ];
+export async function ReportedPetsPage() {
+  const reportedPets = useReportedPets();
+  const userData = useRecoilValue(dataSelector);
+
+  try {
+    await reportedPets(userData.userId);
+    console.log("ReportedPetsPage (myReportedPets): ", userData.myReportedPets);
+  } catch (error) {
+    console.error(error);
+  }
 
   return (
     <div className="general-container">
       <h1 className="main-title">Mascotas reportadas</h1>
       <div className="reported-pets-container">
-        {myReportedPets.length ? (
-          myReportedPets.map((rp) =>
+        {userData.myReportedPets.length ? (
+          userData.myReportedPets.map((rp) =>
             rp.found ? (
               <FoundPetCardComp
                 id={rp.id}

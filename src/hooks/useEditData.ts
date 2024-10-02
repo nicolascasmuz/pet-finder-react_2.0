@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import {
   useSetRecoilState,
   useRecoilValue,
@@ -9,7 +8,6 @@ import { dataAtom, dataSelector } from "../atoms/data-atom";
 import { editDataAtom, editDataSelector } from "../atoms/set-edit-data-atoms";
 
 function useEditData() {
-  const navigate = useNavigate();
   const setEditDataState = useSetRecoilState(editDataAtom);
   const editDataLoadable = useRecoilValueLoadable(editDataSelector);
   const setDataState = useSetRecoilState(dataAtom);
@@ -34,7 +32,7 @@ function useEditData() {
       };
       setDataState(newProfileData);
     }
-  }, [editDataLoadable, navigate]);
+  }, [editDataLoadable]);
 
   async function editData(newData) {
     setEditDataState(newData);
