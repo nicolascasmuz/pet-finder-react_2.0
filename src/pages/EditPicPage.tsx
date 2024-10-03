@@ -41,6 +41,8 @@ export function EditPicPage() {
       email: userData.email,
       address: userData.address,
       location: userData.location,
+      lng: userData.lng,
+      lat: userData.lat,
     };
 
     if (picFile != undefined) {

@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./header-menu-comp.css";
 import petFinderLogo1 from "../resources/pet-finder-logo.png";
-import blankProfilePic from "../resources/blank-profile-picture.png";
 import burgerMenuImg from "../resources/burger-menu.png";
 import { Link } from "react-router-dom";
+import { useLogOut } from "../hooks/useLogOut";
 
-export function HeaderMenuComp(props) {
+export function HeaderMenuComp({ profilePic }) {
+  const logOut = useLogOut();
+  const logOutRef = useRef<HTMLAnchorElement>(null); // Crear un ref para el elemento "Cerrar sesión"
+
+  useEffect(() => {
+    const logOutEl = logOutRef.current;
+
+    if (logOutEl) {
+      logOutEl.addEventListener("click", logOut);
+
+      // Cleanup del event listener
+      return () => {
+        logOutEl.removeEventListener("click", logOut);
+      };
+    }
+  }, [logOut]);
+
   return (
     <header className="header">
       <img
@@ -18,7 +34,7 @@ export function HeaderMenuComp(props) {
         <div className="header__pp-burger-container">
           <img
             className="header__profile-pic-menu"
-            src={blankProfilePic}
+            src={profilePic}
             alt="profile-pic-menu"
           />
           <img
@@ -45,7 +61,7 @@ export function HeaderMenuComp(props) {
           <Link to="/map" className="header__option">
             Mapa
           </Link>
-          <Link to="/main" className="header__option">
+          <Link to="/main" className="header__option-log-out" ref={logOutRef}>
             Cerrar sesión
           </Link>
         </li>

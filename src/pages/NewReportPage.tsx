@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { ButtonComp } from "../components/ButtonComp";
 import { FormInputComp } from "../components/FormInputComp";
 import { useNewReport } from "../hooks/useNewReport";
@@ -113,11 +114,13 @@ export function NewReportPage() {
           color="#ff7f87"
           textContent="Reportar mascota"
         />
-        <ButtonComp
-          className="button-cancel"
-          color="#ff7f87"
-          textContent="Cancelar"
-        />
+        <Link to="/home" className="button-cancel">
+          <ButtonComp
+            className="button-cancel"
+            color="#ff7f87"
+            textContent="Cancelar"
+          />
+        </Link>
       </form>
     </div>
   );

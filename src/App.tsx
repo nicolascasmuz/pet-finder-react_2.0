@@ -1,15 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Outlet } from "react-router-dom";
 import { HeaderComp } from "./components/HeaderComp";
 import { HeaderMenuComp } from "./components/HeaderMenuComp";
+import { dataSelector } from "./atoms/data-atom";
+import { useRecoilValue } from "recoil";
 import "./App.css";
 
 export function App() {
-  let loggedIn = true;
+  const userData = useRecoilValue(dataSelector);
 
   return (
     <div className="app-container">
-      {loggedIn ? <HeaderMenuComp /> : <HeaderComp />}
+      {userData.userId ? (
+        <HeaderMenuComp profilePic={userData.picURL} />
+      ) : (
+        <HeaderComp />
+      )}
       <Outlet />
     </div>
   );

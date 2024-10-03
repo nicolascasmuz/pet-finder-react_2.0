@@ -6,7 +6,21 @@ function loadInitialState() {
     const localData = localStorage.getItem("saved-state");
     // Verifica que localData no sea null o cadena vacía
     if (!localData) {
-      return JSON.parse(localData);
+      return {
+        userId: "",
+        picURL: "",
+        nickname: "",
+        email: "",
+        password: "",
+        address: "",
+        location: "",
+        lat: "",
+        lng: "",
+        newUser: "",
+        selectedPet: "",
+        petsByRadius: [],
+        myReportedPets: [],
+      };
     } else {
       // Devuelve el estado inicial vacío si no hay nada en localStorage
       return {

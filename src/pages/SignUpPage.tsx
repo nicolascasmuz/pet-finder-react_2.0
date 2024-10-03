@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ButtonComp } from "../components/ButtonComp";
 import { FormInputComp } from "../components/FormInputComp";
 import "./sign-up-page.css";
 import { Link } from "react-router-dom";
 import { useSignUp } from "../hooks/useSignUp";
+import { useLogOut } from "../hooks/useLogOut";
 
 export function SignUpPage() {
+  const logOut = useLogOut();
+  useEffect(() => {
+    logOut();
+  }, []);
+
   const signUp = useSignUp();
 
   const HandleLogIn = async (e) => {

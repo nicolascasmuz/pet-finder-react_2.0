@@ -20,6 +20,8 @@ export async function updateProfile(userId, updatedProfile) {
       email: updatedProfile.email,
       address: updatedProfile.address,
       location: updatedProfile.location,
+      lng: updatedProfile.lng,
+      lat: updatedProfile.lat,
     };
     const dataToUpdateAuth = {
       email: updatedProfile.email,
