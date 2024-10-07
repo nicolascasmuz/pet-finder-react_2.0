@@ -17,7 +17,7 @@ function loadInitialState() {
         lat: "",
         lng: "",
         newUser: "",
-        selectedPet: "",
+        selectedPet: {},
         petsByRadius: [],
         myReportedPets: [],
       };
@@ -34,7 +34,7 @@ function loadInitialState() {
         lat: "",
         lng: "",
         newUser: "",
-        selectedPet: "",
+        selectedPet: {},
         petsByRadius: [],
         myReportedPets: [],
       };

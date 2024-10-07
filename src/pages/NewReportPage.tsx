@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import { ButtonComp } from "../components/ButtonComp";
 import { FormInputComp } from "../components/FormInputComp";
 import { useNewReport } from "../hooks/useNewReport";
-import "./new-report-page.css";
+import { dataSelector } from "../atoms/data-atom";
+import { useRecoilValue } from "recoil";
 import "mapbox-gl/dist/mapbox-gl.css";
 import uploadPic from "../resources/upload-pic.png";
 import pinMap from "../resources/pin-map.png";
-import { useRecoilValue } from "recoil";
-import { dataSelector } from "../atoms/data-atom";
 import { Dropzone } from "dropzone";
 import mapboxgl from "mapbox-gl";
+import "./new-report-page.css";
 
 const MAPBOX_TOKEN =
   "pk.eyJ1Ijoibmljb2xhc2Nhc211eiIsImEiOiJjbGlnazg2cjExZTdvM21tcWl6eGU5bDM0In0.EtaC4N7nb_NuwfddaKZaow";

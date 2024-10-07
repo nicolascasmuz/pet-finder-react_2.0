@@ -14,9 +14,10 @@ export function ReportedPetsPage() {
       <h1 className="main-title">Mascotas reportadas</h1>
       <div className="reported-pets-container">
         {userData.myReportedPets.length ? (
-          userData.myReportedPets.map((rp) =>
+          userData.myReportedPets.map((rp, key) =>
             rp.found ? (
               <FoundPetCardComp
+                key={key}
                 id={rp.id}
                 picURL={rp.picURL}
                 name={rp.name}
@@ -24,6 +25,7 @@ export function ReportedPetsPage() {
               />
             ) : (
               <ReportedPetCardComp
+                key={key}
                 id={rp.id}
                 picURL={rp.picURL}
                 name={rp.name}
