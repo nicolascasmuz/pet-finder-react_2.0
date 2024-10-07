@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ButtonComp } from "../components/ButtonComp";
 import { FormInputComp } from "../components/FormInputComp";
-import "./log-in-page.css";
 import { Link } from "react-router-dom";
 import { useLogIn } from "../hooks/useLogIn";
+import "./log-in-page.css";
 import { useLogOut } from "../hooks/useLogOut";
 
 function LogInPage() {
@@ -13,9 +13,12 @@ function LogInPage() {
   }, []);
 
   const logIn = useLogIn();
+
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passInputRef = useRef<HTMLInputElement>(null);
-  const wrongDataRef = useRef<HTMLSpanElement>(null);
+
+  const [emailDisplay, setEmailDisplay] = useState(false);
+  const [passDisplay, setPassDisplay] = useState(false);
 
   const HandleLogIn = async (e) => {
     e.preventDefault();
@@ -25,21 +28,35 @@ function LogInPage() {
     if (emailValue && passValue) {
       try {
         await logIn(emailValue, passValue);
+        emailInputRef.current.style.border = "solid 1px #b2bec3";
+        passInputRef.current.style.border = "solid 1px #b2bec3";
+        setEmailDisplay(false);
+        setPassDisplay(false);
       } catch (error) {
-        emailInputRef.current.style.border = "solid 3px #EA2027";
-        passInputRef.current.style.border = "solid 3px #EA2027";
-        wrongDataRef.current.style.display = "block";
+        if (emailInputRef.current) {
+          emailInputRef.current.style.border = "solid 3px #EA2027";
+        }
+        if (passInputRef.current) {
+          passInputRef.current.style.border = "solid 3px #EA2027";
+        }
         console.error("Error al iniciar sesión: ", error);
       }
-    } else if (!emailValue && passValue) {
+    }
+    if (!emailValue && passValue) {
       emailInputRef.current.style.border = "solid 3px #EA2027";
       passInputRef.current.style.border = "solid 1px #b2bec3";
+      setEmailDisplay(true);
+      setPassDisplay(false);
     } else if (emailValue && !passValue) {
       emailInputRef.current.style.border = "solid 1px #b2bec3";
       passInputRef.current.style.border = "solid 3px #EA2027";
+      setEmailDisplay(false);
+      setPassDisplay(true);
     } else if (!emailValue && !passValue) {
       emailInputRef.current.style.border = "solid 3px #EA2027";
       passInputRef.current.style.border = "solid 3px #EA2027";
+      setEmailDisplay(true);
+      setPassDisplay(true);
     }
   };
 
@@ -52,17 +69,19 @@ function LogInPage() {
       <form className="login-form" onSubmit={HandleLogIn}>
         <FormInputComp
           className="input1"
-          type={"email"}
-          name={"email"}
-          textContent={"EMAIL"}
+          type="email"
+          name="email"
+          textContent="EMAIL"
           ref={emailInputRef}
+          rfDisplay={emailDisplay}
         />
         <FormInputComp
           className="input2"
-          type={"password"}
-          name={"pass"}
-          textContent={"CONTRASEÑA"}
+          type="password"
+          name="pass"
+          textContent="CONTRASEÑA"
           ref={passInputRef}
+          rfDisplay={passDisplay}
         />
         <p className="paragraph-02">
           ¿Aún no estás registrado?{" "}
@@ -71,7 +90,7 @@ function LogInPage() {
           </Link>
         </p>
         <div className="button-next">
-          <ButtonComp color="#ff7f87" textContent={"Siguiente"} />
+          <ButtonComp color="#ff7f87" textContent="Siguiente" />
         </div>
       </form>
     </div>

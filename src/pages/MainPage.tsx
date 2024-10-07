@@ -5,7 +5,7 @@ import picture01 from "../resources/picture-01.jpg";
 import { useLogOut } from "../hooks/useLogOut";
 import { Link } from "react-router-dom";
 
-export function MainPage() {
+function MainPage() {
   const logOut = useLogOut();
 
   logOut();
@@ -34,3 +34,5 @@ export function MainPage() {
     </div>
   );
 }
+
+export { MainPage };

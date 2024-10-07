@@ -30,10 +30,10 @@ function useReportedPets() {
         reportedPetsLoadable.contents
       );
 
-      /* setDataState((prevState) => ({
+      setDataState((prevState) => ({
         ...prevState,
         myReportedPets: reportedPetsLoadable.contents,
-      })); */
+      }));
     }
   }, [reportedPetsLoadable]);
 

@@ -7,7 +7,7 @@ import { useLogOut } from "../hooks/useLogOut";
 
 export function HeaderMenuComp({ profilePic }) {
   const logOut = useLogOut();
-  const logOutRef = useRef<HTMLAnchorElement>(null); // Crear un ref para el elemento "Cerrar sesión"
+  const logOutRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     const logOutEl = logOutRef.current;
@@ -15,7 +15,6 @@ export function HeaderMenuComp({ profilePic }) {
     if (logOutEl) {
       logOutEl.addEventListener("click", logOut);
 
-      // Cleanup del event listener
       return () => {
         logOutEl.removeEventListener("click", logOut);
       };
