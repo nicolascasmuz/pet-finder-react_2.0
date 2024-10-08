@@ -4,24 +4,10 @@ import pinMap from "../resources/pin-map.png";
 import { Link } from "react-router-dom";
 import { dataSelector } from "../atoms/data-atom";
 import { useRecoilValue } from "recoil";
-import { useReportedPets } from "../hooks/useReportedPets";
 import "./home-page.css";
 
 export function HomePage() {
   const userData = useRecoilValue(dataSelector);
-  const reportedPets = useReportedPets();
-
-  const initReportedPets = async () => {
-    try {
-      await reportedPets(userData.userId);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    initReportedPets();
-  }, []);
 
   return (
     <div className="general-container">

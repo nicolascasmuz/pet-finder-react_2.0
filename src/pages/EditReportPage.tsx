@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ButtonComp } from "../components/ButtonComp";
 import { FormInputComp } from "../components/FormInputComp";
 import { useEditReport } from "../hooks/useEditReport";
 import { dataSelector } from "../atoms/data-atom";
 import { useRecoilValue } from "recoil";
-import "mapbox-gl/dist/mapbox-gl.css";
 import { Dropzone } from "dropzone";
 import mapboxgl from "mapbox-gl";
 import pinMap from "../resources/pin-map.png";
+import "mapbox-gl/dist/mapbox-gl.css";
 import "./edit-report-page.css";
 
 const MAPBOX_TOKEN =
@@ -20,14 +20,13 @@ export function EditReportPage() {
 
   const [name, setName] = useState(userData.selectedPet.name);
   const [details, setDetails] = useState(userData.selectedPet.details);
+  const [picFile, setPicFile] = useState<any>(undefined); // Cambiar picFile a useState
+  const [mapCoordinates, setMapCoordinates] = useState<any>(undefined); // Cambiar picFile a useState
 
-  /*   const addPetPicEl = document.querySelector(".add-pet-pic") as HTMLElement;
+  const addPetPicEl = document.querySelector(".add-pet-pic") as HTMLElement;
   const addPetPicSrcEl = document.querySelector(
     ".add-pet-pic"
   ) as HTMLSourceElement;
-
-  let picFile;
-  let mapCoordinates;
 
   useEffect(() => {
     if (addPetPicEl) {
@@ -37,7 +36,7 @@ export function EditReportPage() {
       });
 
       myDropzone.on("addedfile", (file) => {
-        picFile = file;
+        setPicFile(file);
         addPetPicSrcEl.src = file;
       });
 
@@ -49,15 +48,12 @@ export function EditReportPage() {
           zoom: 13,
         });
       }
-      mapCoordinates = initMap();
+      setMapCoordinates(initMap());
     }
-  }, [addPetPicEl]); */
+  }, [addPetPicEl]);
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
-
-    const nameValue = e.target["name"].value;
-    const detailsValue = e.target["det"].value;
 
     const editedData = {
       id: userData.selectedPet.id,
@@ -69,16 +65,24 @@ export function EditReportPage() {
       lat: userData.selectedPet.lat,
     };
 
-    if (nameValue != "" && detailsValue != "") {
-      /* if (picFile != undefined) {
+    if (name != "" && details != "") {
+      if (picFile != undefined) {
         editedData.picURL = picFile.dataURL;
-      } */
+      }
+      if (mapCoordinates != undefined) {
+        editedData.lng = mapCoordinates.getCenter().toArray()[0];
+        editedData.lat = mapCoordinates.getCenter().toArray()[1];
+      }
 
       try {
         await editReport(editedData);
+        console.log("editedData 1: ", editedData);
       } catch (error) {
         console.error(error);
       }
+    } else {
+      console.log("editedData 2: ", editedData);
+      console.log("picFile 2: ", picFile);
     }
   };
 

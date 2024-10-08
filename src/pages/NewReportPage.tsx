@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ButtonComp } from "../components/ButtonComp";
 import { FormInputComp } from "../components/FormInputComp";
 import { useNewReport } from "../hooks/useNewReport";
 import { dataSelector } from "../atoms/data-atom";
 import { useRecoilValue } from "recoil";
-import "mapbox-gl/dist/mapbox-gl.css";
-import uploadPic from "../resources/upload-pic.png";
-import pinMap from "../resources/pin-map.png";
 import { Dropzone } from "dropzone";
 import mapboxgl from "mapbox-gl";
+import uploadPic from "../resources/upload-pic.png";
+import pinMap from "../resources/pin-map.png";
+import "mapbox-gl/dist/mapbox-gl.css";
 import "./new-report-page.css";
 
 const MAPBOX_TOKEN =
@@ -17,6 +18,7 @@ const MAPBOX_TOKEN =
 mapboxgl.accessToken = MAPBOX_TOKEN;
 
 export function NewReportPage() {
+  const navigate = useNavigate();
   const newReport = useNewReport();
   const userData = useRecoilValue(dataSelector);
 
@@ -76,8 +78,11 @@ export function NewReportPage() {
 
       try {
         await newReport(newData);
+        console.log("newData: ", newData);
       } catch (error) {
         console.error(error);
+      } finally {
+        navigate("/new-reported-pet");
       }
     }
   };
