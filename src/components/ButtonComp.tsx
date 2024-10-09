@@ -3,7 +3,14 @@ import "./button-comp.css";
 
 export function ButtonComp(props) {
   return (
-    <button className="button" style={{ backgroundColor: props.color }}>
+    <button
+      className="button"
+      style={{
+        display: props.fpDisplay ? "none" : "block",
+        backgroundColor: props.color,
+      }}
+      onClick={props.onClick}
+    >
       {props.textContent}
     </button>
   );

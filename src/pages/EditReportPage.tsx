@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ButtonComp } from "../components/ButtonComp";
 import { FormInputComp } from "../components/FormInputComp";
+import { ButtonComp } from "../components/ButtonComp";
+import { FoundPetComp } from "../components/FoundPetComp";
+import { DeletedPetComp } from "../components/DeletedPetComp";
 import { useEditReport } from "../hooks/useEditReport";
 import { dataSelector } from "../atoms/data-atom";
 import { useRecoilValue } from "recoil";
@@ -20,8 +22,10 @@ export function EditReportPage() {
 
   const [name, setName] = useState(userData.selectedPet.name);
   const [details, setDetails] = useState(userData.selectedPet.details);
-  const [picFile, setPicFile] = useState<any>(undefined); // Cambiar picFile a useState
-  const [mapCoordinates, setMapCoordinates] = useState<any>(undefined); // Cambiar picFile a useState
+  const [picFile, setPicFile] = useState<any>(undefined);
+  const [mapCoordinates, setMapCoordinates] = useState<any>(undefined);
+  const [fpCompDisplay, setFpCompDisplay] = useState(false);
+  const [dpCompDisplay, setDpCompDisplay] = useState(false);
 
   const addPetPicEl = document.querySelector(".add-pet-pic") as HTMLElement;
   const addPetPicSrcEl = document.querySelector(
@@ -86,8 +90,38 @@ export function EditReportPage() {
     }
   };
 
+  const HandleFoundPetClick = async (e) => {
+    setFpCompDisplay(true);
+  };
+
+  const HandleFPYesClick = async (e) => {
+    e.preventDefault();
+
+    const editedData = {
+      id: userData.selectedPet.id,
+      picURL: userData.selectedPet.picURL,
+      name: userData.selectedPet.name,
+      details: userData.selectedPet.details,
+      found: true,
+      lng: userData.selectedPet.lng,
+      lat: userData.selectedPet.lat,
+    };
+
+    try {
+      await editReport(editedData);
+      console.log("editedData fp: ", editedData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const HandleFPNOClick = async (e) => {
+    setFpCompDisplay(false);
+  };
+
   return (
     <div className="general-container">
+      {/* <DeletedPetComp></DeletedPetComp> */}
       <h1 className="edit-report-main-title">Editar reporte de mascota</h1>
       <form className="edit-report-form" onSubmit={HandleSubmit}>
         <FormInputComp
@@ -124,16 +158,28 @@ export function EditReportPage() {
           textContent="Guardar"
         />
       </form>
-      <ButtonComp
-        className="button-found"
-        color="#ff7f87"
-        textContent="Reportar como encontrado"
-      />
-      <ButtonComp
-        className="button-delete"
-        color="#ff7f87"
-        textContent="Eliminar reporte"
-      />
+      <div className="button-container">
+        <FoundPetComp
+          color="#ff7f87"
+          textContent="Reportar como encontrado"
+          name={userData.selectedPet.name}
+          yesOnClick={HandleFPYesClick}
+          noOnClick={HandleFPNOClick}
+          fpDisplay={fpCompDisplay}
+        />
+        <ButtonComp
+          className="button-found"
+          color="#ff7f87"
+          textContent="Reportar como encontrado"
+          onClick={HandleFoundPetClick}
+          fpDisplay={fpCompDisplay}
+        />
+        <ButtonComp
+          className="button-delete"
+          color="#ff7f87"
+          textContent="Eliminar reporte"
+        />
+      </div>
     </div>
   );
 }

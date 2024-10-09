@@ -3,11 +3,6 @@
   justify-items: center;
   padding: 0 15px;
 }
-found-pet-comp {
-  display: none;
-  position: fixed;
-  top: 35%;
-}
 deleted-pet-comp {
   display: none;
   position: fixed;
@@ -90,7 +85,12 @@ deleted-pet-comp {
   margin: 0;
 }
 .button-save {
-  margin-top: 20px;
+  margin: 20px;
+}
+.button-container {
+  display: grid;
+  gap: 20px;
+  padding: 20px;
 }
 .button-found {
   margin-top: 20px;
