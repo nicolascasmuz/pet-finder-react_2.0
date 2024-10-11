@@ -4,6 +4,7 @@ import { ButtonComp } from "../components/ButtonComp";
 import { FoundPetComp } from "../components/FoundPetComp";
 import { DeletedPetComp } from "../components/DeletedPetComp";
 import { useEditReport } from "../hooks/useEditReport";
+import { useDeleteReport } from "../hooks/useDeleteReport";
 import { dataSelector } from "../atoms/data-atom";
 import { useRecoilValue } from "recoil";
 import { Dropzone } from "dropzone";
@@ -18,6 +19,7 @@ mapboxgl.accessToken = MAPBOX_TOKEN;
 
 export function EditReportPage() {
   const editReport = useEditReport();
+  const deleteReport = useDeleteReport();
   const userData: any = useRecoilValue(dataSelector);
 
   const [name, setName] = useState(userData.selectedPet.name);
@@ -56,6 +58,8 @@ export function EditReportPage() {
     }
   }, [addPetPicEl]);
 
+  // SE EDITAN LOS DATOS
+
   const HandleSubmit = async (e) => {
     e.preventDefault();
 
@@ -80,21 +84,19 @@ export function EditReportPage() {
 
       try {
         await editReport(editedData);
-        console.log("editedData 1: ", editedData);
       } catch (error) {
         console.error(error);
       }
-    } else {
-      console.log("editedData 2: ", editedData);
-      console.log("picFile 2: ", picFile);
     }
   };
+
+  // SE SETEA EL FOUND
 
   const HandleFoundPetClick = async (e) => {
     setFpCompDisplay(true);
   };
 
-  const HandleFPYesClick = async (e) => {
+  const HandleFPYESClick = async (e) => {
     e.preventDefault();
 
     const editedData = {
@@ -109,7 +111,6 @@ export function EditReportPage() {
 
     try {
       await editReport(editedData);
-      console.log("editedData fp: ", editedData);
     } catch (error) {
       console.error(error);
     }
@@ -119,9 +120,28 @@ export function EditReportPage() {
     setFpCompDisplay(false);
   };
 
+  // SE ELIMINA EL REPORTE
+
+  const HandleDeletedPetClick = async (e) => {
+    setDpCompDisplay(true);
+  };
+
+  const HandleDPYESClick = async (e) => {
+    e.preventDefault();
+
+    try {
+      await deleteReport(userData.selectedPet.id);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const HandleDPNOClick = async (e) => {
+    setDpCompDisplay(false);
+  };
+
   return (
     <div className="general-container">
-      {/* <DeletedPetComp></DeletedPetComp> */}
       <h1 className="edit-report-main-title">Editar reporte de mascota</h1>
       <form className="edit-report-form" onSubmit={HandleSubmit}>
         <FormInputComp
@@ -160,10 +180,8 @@ export function EditReportPage() {
       </form>
       <div className="button-container">
         <FoundPetComp
-          color="#ff7f87"
-          textContent="Reportar como encontrado"
           name={userData.selectedPet.name}
-          yesOnClick={HandleFPYesClick}
+          yesOnClick={HandleFPYESClick}
           noOnClick={HandleFPNOClick}
           fpDisplay={fpCompDisplay}
         />
@@ -172,12 +190,20 @@ export function EditReportPage() {
           color="#ff7f87"
           textContent="Reportar como encontrado"
           onClick={HandleFoundPetClick}
-          fpDisplay={fpCompDisplay}
+          buttonDisplay={fpCompDisplay}
         />
+        <DeletedPetComp
+          name={userData.selectedPet.name}
+          yesOnClick={HandleDPYESClick}
+          noOnClick={HandleDPNOClick}
+          dpDisplay={dpCompDisplay}
+        ></DeletedPetComp>
         <ButtonComp
           className="button-delete"
           color="#ff7f87"
           textContent="Eliminar reporte"
+          onClick={HandleDeletedPetClick}
+          buttonDisplay={dpCompDisplay}
         />
       </div>
     </div>

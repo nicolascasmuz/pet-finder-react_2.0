@@ -5,7 +5,7 @@ const API_BASE_URL = "http://localhost:3000";
 
 function SetRadiusFormComp(props) {
   return (
-    <form className="search-form">
+    <form className="search-form" onSubmit={props.onSubmit}>
       <select name="distance" className="select-distance">
         <option value="1000">1 km</option>
         <option value="2000">2 kms</option>

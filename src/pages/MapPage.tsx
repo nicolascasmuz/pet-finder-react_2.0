@@ -2,7 +2,7 @@ import React from "react";
 import { MapComp } from "../components/MapComp";
 import "./map-page.css";
 
-export function MapPage() {
+function MapPage() {
   return (
     <div className="general-container">
       <div className="map-page-container">
@@ -11,3 +11,5 @@ export function MapPage() {
     </div>
   );
 }
+
+export { MapPage };

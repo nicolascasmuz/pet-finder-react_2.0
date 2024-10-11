@@ -6,7 +6,7 @@ export function ButtonComp(props) {
     <button
       className="button"
       style={{
-        display: props.fpDisplay ? "none" : "block",
+        display: props.buttonDisplay ? "none" : "block",
         backgroundColor: props.color,
       }}
       onClick={props.onClick}

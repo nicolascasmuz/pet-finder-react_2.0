@@ -37,7 +37,7 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: "50mb" }));
 
-/* sequelize.sync({ alter: true }).then((res) => {
+/* sequelize.sync({ force: true }).then((res) => {
   console.log(res);
 }); */
 
@@ -201,6 +201,7 @@ app.post("/report", async (req, res) => {
 // ELIMINA UN REPORTE
 app.delete("/delete-report", async (req, res) => {
   const { id } = req.body;
+  console.log("backend: ", id);
 
   if (!req.body) {
     res.status(400).json({ message: "no body" });
