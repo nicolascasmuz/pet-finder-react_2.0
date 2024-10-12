@@ -19,6 +19,7 @@ import { NewReportedPetPage } from "../pages/NewReportedPetPage";
 import { FoundPetPage } from "../pages/FoundPetPage";
 import { DeletedPetPage } from "../pages/DeletedPetPage";
 import { MapPage } from "../pages/mapPage";
+import { SelectedPetMapPage } from "../pages/SelectedPetMapPage";
 
 export const indexRouter = createBrowserRouter([
   {
@@ -96,6 +97,10 @@ export const indexRouter = createBrowserRouter([
       {
         path: "/map",
         element: <MapPage />,
+      },
+      {
+        path: "/selected-pet-map",
+        element: <SelectedPetMapPage />,
       },
     ],
   },

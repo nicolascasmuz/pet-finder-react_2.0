@@ -16,20 +16,11 @@ function useReportedPets() {
   const setDataState = useSetRecoilState(dataAtom);
   const stateData = useRecoilValue(dataSelector);
 
-  console.log(
-    "reportedPetsLoadable.contents 1: ",
-    reportedPetsLoadable.contents
-  );
   useEffect(() => {
     if (
       reportedPetsLoadable.state === "hasValue" &&
       reportedPetsLoadable.contents
     ) {
-      console.log(
-        "reportedPetsLoadable.contents 2: ",
-        reportedPetsLoadable.contents
-      );
-
       setDataState((prevState) => ({
         ...prevState,
         myReportedPets: reportedPetsLoadable.contents,

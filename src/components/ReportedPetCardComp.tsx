@@ -6,13 +6,13 @@ import "./reported-pet-card-comp.css";
 
 export function ReportedPetCardComp(props) {
   const navigate = useNavigate();
-  const selectedPet = useSelectedPet();
+  const { selectMyReportedPet } = useSelectedPet();
 
   const handleClick = async (e) => {
     e.preventDefault();
     const petId = props.id;
     try {
-      await selectedPet(petId);
+      await selectMyReportedPet(petId);
     } catch (error) {
       console.error(error);
     }

@@ -1,9 +1,9 @@
-.map-comp__map-container {
+.map-comp__container {
   display: grid;
   justify-items: center;
   align-items: center;
 }
-#map {
+.map-comp__map {
   width: 100vw;
   height: calc(100vh - 130px);
 }

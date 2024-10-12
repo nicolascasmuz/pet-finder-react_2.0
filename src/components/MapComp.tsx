@@ -1,16 +1,20 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { usePetsByRadius } from "../hooks/usePetsByRadius";
+import { useSelectedPet } from "../hooks/useSelectedPet";
 import { useRecoilValue } from "recoil";
 import { dataSelector } from "../atoms/data-atom";
 import mapboxgl from "mapbox-gl";
 import { SetRadiusFormComp } from "./SetRadiusFormComp";
 import "./map-comp.css";
 
-const API_BASE_URL = "http://localhost:3000";
+const MAPBOX_TOKEN =
+  "pk.eyJ1Ijoibmljb2xhc2Nhc211eiIsImEiOiJjbGlnazg2cjExZTdvM21tcWl6eGU5bDM0In0.EtaC4N7nb_NuwfddaKZaow";
+mapboxgl.accessToken = MAPBOX_TOKEN;
 
 function MapComp() {
   const petsByRadius = usePetsByRadius();
+  const { selectMissingPet } = useSelectedPet();
   const userData = useRecoilValue(dataSelector);
 
   useEffect(() => {
@@ -25,33 +29,29 @@ function MapComp() {
       for (const p of userData.petsByRadius) {
         const { lat, lng } = p._geoloc;
 
-        new mapboxgl.Marker({ color: "#eb6372" })
+        const marker = new mapboxgl.Marker({ color: "#eb6372" })
           .setLngLat([lng, lat])
           .addTo(map);
+
+        marker.getElement().addEventListener("click", async () => {
+          const { lng, lat } = marker._lngLat;
+
+          const selectedPetOnMap = userData.petsByRadius.find((p) => {
+            return p._geoloc.lng == lng && p._geoloc.lat == lat;
+          });
+
+          console.log("selectedPetOnMap: ", selectedPetOnMap);
+
+          try {
+            selectMissingPet(selectedPetOnMap);
+          } catch (error) {
+            console.error(error);
+          }
+        });
       }
     } else {
       null;
     }
-
-    /* marker.getElement().addEventListener("click", async () => {
-        const { lng, lat } = marker._lngLat;
-  
-        const selectedPetOnMap = userData.petsByRadius.find((p) => {
-            return p.lng == lng && p.lat == lat;
-          });
-    
-          /* cs.selectedPet = selectedPetOnMap;
-          state.setState(cs);
-    
-          this.petId = selectedPetOnMap.id;
-          this.picURL = selectedPetOnMap.picURL;
-          this.name = selectedPetOnMap.name;
-          this.details = selectedPetOnMap.details;
-          this.lat = selectedPetOnMap.lat;
-          this.lng = selectedPetOnMap.lng;
-    
-          this.connectedCallbackSelectedPet();
-      });  */
   });
 
   const handleSubmit = async (e) => {
@@ -76,8 +76,8 @@ function MapComp() {
   return (
     <>
       <SetRadiusFormComp onSubmit={handleSubmit} />
-      <div className="map-comp__map-container">
-        <div id="map"></div>
+      <div className="map-comp__container">
+        <div className="map-comp__map" id="map"></div>
       </div>
     </>
   );
