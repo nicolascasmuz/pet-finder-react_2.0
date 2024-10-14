@@ -90,7 +90,7 @@ function LogInPage() {
           </Link>
         </p>
         <div className="button-next">
-          <ButtonComp color="#ff7f87" textContent="Siguiente" />
+          <ButtonComp color="#ff7f87" textContent="Acceder" />
         </div>
       </form>
     </div>

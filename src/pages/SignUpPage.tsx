@@ -151,7 +151,7 @@ function SignUpPage() {
           </Link>
         </p>
         <div className="button-access">
-          <ButtonComp color="#ff7f87" textContent="Acceder" />
+          <ButtonComp color="#ff7f87" textContent="Siguiente" />
         </div>
       </form>
     </div>

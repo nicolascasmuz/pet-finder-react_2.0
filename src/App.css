@@ -11,6 +11,10 @@ body {
   background: linear-gradient(#fafafa 50%, #8896e090);
 }
 
+.app-container.no-background {
+  background: none;
+}
+
 @font-face {
   font-family: "Poppins Bold";
   src: url(./fonts/Poppins-Bold.ttf);

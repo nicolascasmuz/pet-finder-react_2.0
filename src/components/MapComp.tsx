@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { usePetsByRadius } from "../hooks/usePetsByRadius";
 import { useSelectedPet } from "../hooks/useSelectedPet";
 import { useRecoilValue } from "recoil";
@@ -13,7 +12,7 @@ const MAPBOX_TOKEN =
 mapboxgl.accessToken = MAPBOX_TOKEN;
 
 function MapComp() {
-  const petsByRadius = usePetsByRadius();
+  const { petsByRadius } = usePetsByRadius();
   const { selectMissingPet } = useSelectedPet();
   const userData = useRecoilValue(dataSelector);
 
@@ -43,7 +42,7 @@ function MapComp() {
           console.log("selectedPetOnMap: ", selectedPetOnMap);
 
           try {
-            selectMissingPet(selectedPetOnMap);
+            await selectMissingPet(selectedPetOnMap);
           } catch (error) {
             console.error(error);
           }

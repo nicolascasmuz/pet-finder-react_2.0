@@ -18,7 +18,7 @@ import { EditReportPage } from "../pages/EditReportPage";
 import { NewReportedPetPage } from "../pages/NewReportedPetPage";
 import { FoundPetPage } from "../pages/FoundPetPage";
 import { DeletedPetPage } from "../pages/DeletedPetPage";
-import { MapPage } from "../pages/mapPage";
+import { MapPage } from "../pages/MapPage";
 import { SelectedPetMapPage } from "../pages/SelectedPetMapPage";
 
 export const indexRouter = createBrowserRouter([

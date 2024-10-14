@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { MissingPetCardComp } from "../components/MissingPetCardComp";
 import { useRecoilValue } from "recoil";
+import { usePetsByRadius } from "../hooks/usePetsByRadius";
 import { dataSelector } from "../atoms/data-atom";
 import mapboxgl from "mapbox-gl";
 import "./selected-pet-map-comp.css";
@@ -12,8 +13,15 @@ mapboxgl.accessToken = MAPBOX_TOKEN;
 
 function SelectedPetMapComp() {
   const userData = useRecoilValue(dataSelector);
+  const { deletePetsByRadius } = usePetsByRadius();
 
   useEffect(() => {
+    try {
+      deletePetsByRadius(true);
+    } catch (error) {
+      console.error(error);
+    }
+
     new mapboxgl.Map({
       container: document.querySelector("#map"),
       style: "mapbox://styles/mapbox/streets-v11",

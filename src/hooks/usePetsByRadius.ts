@@ -34,7 +34,16 @@ function usePetsByRadius() {
     setPetsByRadiusState(search);
   }
 
-  return petsByRadius;
+  async function deletePetsByRadius(trueValue) {
+    if (trueValue) {
+      setDataState((prevState) => ({
+        ...prevState,
+        petsByRadius: [],
+      }));
+    }
+  }
+
+  return { petsByRadius, deletePetsByRadius };
 }
 
 export { usePetsByRadius };

@@ -25,7 +25,6 @@ const authSelector = selector({
       const json = await response.json();
       const data = json.profile;
 
-      console.log("login-atoms: ", data);
       return data;
     } else {
       return false;

@@ -10,13 +10,30 @@ import {
   missingPetsAtom,
   missingPetsSelector,
 } from "../atoms/missing-pets-atoms";
+import { petsByRadiusAtom } from "../atoms/pets-by-radius-atoms";
 
 function useSelectedPet() {
   const navigate = useNavigate();
   const missingPetsState = useSetRecoilState(missingPetsAtom);
+  const setPetsByRadiusState = useSetRecoilState(petsByRadiusAtom);
   const missingPetsLoadable = useRecoilValueLoadable(missingPetsSelector);
   const setDataState = useSetRecoilState(dataAtom);
   const stateData = useRecoilValue(dataSelector);
+
+  const emptyMissingPetsAtom = {
+    userId: "",
+    name: "",
+    found: "",
+    _geoloc: { lng: "", lat: "" },
+    objectID: "",
+  };
+
+  const emptyPetsByRadiusAtom = {
+    userID: "",
+    lat: "",
+    lng: "",
+    distance: "",
+  };
 
   useEffect(() => {
     if (
@@ -28,6 +45,8 @@ function useSelectedPet() {
         selectedPet: missingPetsLoadable.contents,
       }));
       navigate("/selected-pet-map");
+      missingPetsState(emptyMissingPetsAtom);
+      setPetsByRadiusState(emptyPetsByRadiusAtom);
     }
   }, [missingPetsLoadable]);
 
@@ -46,7 +65,15 @@ function useSelectedPet() {
     missingPetsState(missingPet);
   }
 
-  return { selectMyReportedPet, selectMissingPet };
+  async function deleteSelectedPet() {
+    console.log("deleteSelectedPet");
+    setDataState((prevState) => ({
+      ...prevState,
+      selectedPet: [],
+    }));
+  }
+
+  return { selectMyReportedPet, selectMissingPet, deleteSelectedPet };
 }
 
 export { useSelectedPet };
