@@ -5,7 +5,7 @@ import { FoundPetComp } from "../components/FoundPetComp";
 import { DeletedPetComp } from "../components/DeletedPetComp";
 import { useEditReport } from "../hooks/useEditReport";
 import { useDeleteReport } from "../hooks/useDeleteReport";
-import { dataSelector } from "../atoms/data-atom";
+import { dataSelector } from "../atoms/data-atoms";
 import { useRecoilValue } from "recoil";
 import { Dropzone } from "dropzone";
 import mapboxgl from "mapbox-gl";
@@ -13,8 +13,7 @@ import pinMap from "../resources/pin-map.png";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./edit-report-page.css";
 
-const MAPBOX_TOKEN =
-  "pk.eyJ1Ijoibmljb2xhc2Nhc211eiIsImEiOiJjbGlnazg2cjExZTdvM21tcWl6eGU5bDM0In0.EtaC4N7nb_NuwfddaKZaow";
+const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_KEY;
 mapboxgl.accessToken = MAPBOX_TOKEN;
 
 export function EditReportPage() {

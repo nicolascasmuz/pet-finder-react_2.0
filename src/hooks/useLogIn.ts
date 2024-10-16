@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState, useRecoilValueLoadable } from "recoil";
-import { dataAtom } from "../atoms/data-atom";
+import { dataAtom } from "../atoms/data-atoms";
 import { authAtom, authSelector } from "../atoms/login-atoms";
 
 function useLogIn() {

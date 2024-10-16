@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FoundPetCardComp } from "../components/FoundPetCardComp";
 import { ReportedPetCardComp } from "../components/ReportedPetCardComp";
 import { Navigate } from "react-router-dom";
-import { dataSelector } from "../atoms/data-atom";
+import { dataSelector } from "../atoms/data-atoms";
 import { useRecoilValue } from "recoil";
 import { useReportedPets } from "../hooks/useReportedPets";
 import "./reported-pets-page.css";

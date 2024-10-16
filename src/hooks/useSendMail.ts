@@ -5,8 +5,8 @@ import {
   useRecoilValue,
   useRecoilValueLoadable,
 } from "recoil";
-import { dataAtom, dataSelector } from "../atoms/data-atom";
-const API_BASE_URL = "http://localhost:3000";
+import { dataAtom, dataSelector } from "../atoms/data-atoms";
+import { API_BASE_URL } from "../API_BASE_URL";
 
 function useSendMail() {
   const navigate = useNavigate();

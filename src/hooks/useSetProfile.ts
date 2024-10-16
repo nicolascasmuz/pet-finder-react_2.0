@@ -5,13 +5,12 @@ import {
   useRecoilValue,
   useRecoilValueLoadable,
 } from "recoil";
-import { dataAtom, dataSelector } from "../atoms/data-atom";
+import { dataAtom, dataSelector } from "../atoms/data-atoms";
 import { profileAtom, profileSelector } from "../atoms/set-profile-atoms";
 import mapboxgl from "mapbox-gl";
 import MapboxClient from "mapbox";
 
-const MAPBOX_TOKEN =
-  "pk.eyJ1Ijoibmljb2xhc2Nhc211eiIsImEiOiJjbGlnazg2cjExZTdvM21tcWl6eGU5bDM0In0.EtaC4N7nb_NuwfddaKZaow";
+const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_KEY;
 mapboxgl.accessToken = MAPBOX_TOKEN;
 const mapboxClient = new MapboxClient(MAPBOX_TOKEN);
 

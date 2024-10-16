@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
-import { dataSelector } from "../atoms/data-atom";
+import { dataSelector } from "../atoms/data-atoms";
 import { useNavigate } from "react-router-dom";
 import { useSendMail } from "../hooks/useSendMail";
 import { useSelectedPet } from "../hooks/useSelectedPet";

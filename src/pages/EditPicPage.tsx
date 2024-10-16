@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { ButtonComp } from "../components/ButtonComp";
-import { dataSelector } from "../atoms/data-atom";
+import { dataSelector } from "../atoms/data-atoms";
 import { useRecoilValue } from "recoil";
 import { Dropzone } from "dropzone";
 import { useEditData } from "../hooks/useEditData";

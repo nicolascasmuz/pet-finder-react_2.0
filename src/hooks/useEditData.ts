@@ -4,7 +4,7 @@ import {
   useRecoilValue,
   useRecoilValueLoadable,
 } from "recoil";
-import { dataAtom, dataSelector } from "../atoms/data-atom";
+import { dataAtom, dataSelector } from "../atoms/data-atoms";
 import { editDataAtom, editDataSelector } from "../atoms/set-edit-data-atoms";
 
 function useEditData() {

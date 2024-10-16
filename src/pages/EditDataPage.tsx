@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ButtonComp } from "../components/ButtonComp";
 import { FormInputComp } from "../components/FormInputComp";
-import { dataSelector } from "../atoms/data-atom";
+import { dataSelector } from "../atoms/data-atoms";
 import { useRecoilValue } from "recoil";
 import { useEditData } from "../hooks/useEditData";
 import "./edit-data-page.css";

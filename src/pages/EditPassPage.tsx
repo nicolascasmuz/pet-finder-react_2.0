@@ -4,7 +4,7 @@ import { FormInputComp } from "../components/FormInputComp";
 import { getSHA256ofString } from "../../backend/lib/sha256";
 import { useRecoilValue } from "recoil";
 import { useEditPass } from "../hooks/useEditPass";
-import { dataSelector } from "../atoms/data-atom";
+import { dataSelector } from "../atoms/data-atoms";
 import "./edit-pass-page.css";
 
 export function EditPassPage() {

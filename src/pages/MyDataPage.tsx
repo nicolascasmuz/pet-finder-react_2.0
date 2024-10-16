@@ -1,7 +1,7 @@
 import React from "react";
 import { ButtonComp } from "../components/ButtonComp";
 import { Link } from "react-router-dom";
-import { dataSelector } from "../atoms/data-atom";
+import { dataSelector } from "../atoms/data-atoms";
 import { useRecoilValue } from "recoil";
 import "./my-data-page.css";
 

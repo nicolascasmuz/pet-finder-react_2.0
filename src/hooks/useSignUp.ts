@@ -5,7 +5,7 @@ import {
   useRecoilValue,
   useRecoilValueLoadable,
 } from "recoil";
-import { dataAtom, dataSelector } from "../atoms/data-atom";
+import { dataAtom, dataSelector } from "../atoms/data-atoms";
 import { signinAtom, signinSelector } from "../atoms/sign-up-atoms";
 
 function useSignUp() {

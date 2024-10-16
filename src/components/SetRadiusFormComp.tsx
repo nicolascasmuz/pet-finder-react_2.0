@@ -1,8 +1,6 @@
 import React from "react";
 import "./set-radius-form-comp.css";
 
-const API_BASE_URL = "http://localhost:3000";
-
 function SetRadiusFormComp(props) {
   return (
     <form className="search-form" onSubmit={props.onSubmit}>

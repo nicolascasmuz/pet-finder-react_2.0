@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { ButtonComp } from "../components/ButtonComp";
 import pinMap from "../resources/pin-map.png";
 import { Link } from "react-router-dom";
-import { dataSelector } from "../atoms/data-atom";
+import { dataSelector } from "../atoms/data-atoms";
 import { useRecoilValue } from "recoil";
 import "./home-page.css";
 

@@ -1,5 +1,5 @@
 import { useSetRecoilState } from "recoil";
-import { dataAtom } from "../atoms/data-atom";
+import { dataAtom } from "../atoms/data-atoms";
 
 function useLogOut() {
   const setDataState = useSetRecoilState(dataAtom);

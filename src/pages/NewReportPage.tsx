@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { FormInputComp } from "../components/FormInputComp";
 import { ButtonComp } from "../components/ButtonComp";
 import { useNewReport } from "../hooks/useNewReport";
-import { dataSelector } from "../atoms/data-atom";
+import { dataSelector } from "../atoms/data-atoms";
 import { useRecoilValue } from "recoil";
 import { Dropzone } from "dropzone";
 import mapboxgl from "mapbox-gl";
@@ -13,8 +13,7 @@ import pinMap from "../resources/pin-map.png";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./new-report-page.css";
 
-const MAPBOX_TOKEN =
-  "pk.eyJ1Ijoibmljb2xhc2Nhc211eiIsImEiOiJjbGlnazg2cjExZTdvM21tcWl6eGU5bDM0In0.EtaC4N7nb_NuwfddaKZaow";
+const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_KEY;
 mapboxgl.accessToken = MAPBOX_TOKEN;
 
 export function NewReportPage() {

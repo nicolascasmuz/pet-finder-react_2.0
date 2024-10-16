@@ -1,5 +1,5 @@
 import { atom, selector } from "recoil";
-const API_BASE_URL = "http://localhost:3000";
+import { API_BASE_URL } from "../API_BASE_URL";
 
 const missingPetsAtom = atom({
   key: "missing-pets-atom",
