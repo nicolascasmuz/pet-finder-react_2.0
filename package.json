@@ -6,7 +6,10 @@
   "scripts": {
     "dev:front": "cross-env NODE_ENV=development webpack",
     "dev:back": "ts-node ./backend/dev.ts",
-    "build": "npm install && npm run build && tsc",
+    "dev": "npm run dev:front && npm run dev:back",
+    "build:front": "build ./src/index.tsx",
+    "build:back": "tsc",
+    "build": "npm run build:front && npm run build:back",
     "start": "node ./backend/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
