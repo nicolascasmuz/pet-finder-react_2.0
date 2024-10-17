@@ -10,7 +10,7 @@ import { profileAtom, profileSelector } from "../atoms/set-profile-atoms";
 import mapboxgl from "mapbox-gl";
 import MapboxClient from "mapbox";
 
-const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_KEY;
+const MAPBOX_TOKEN = process.env.MAPBOX_KEY;
 mapboxgl.accessToken = MAPBOX_TOKEN;
 const mapboxClient = new MapboxClient(MAPBOX_TOKEN);
 

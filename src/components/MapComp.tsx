@@ -7,9 +7,6 @@ import mapboxgl from "mapbox-gl";
 import { SetRadiusFormComp } from "./SetRadiusFormComp";
 import "./map-comp.css";
 
-const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_KEY;
-mapboxgl.accessToken = MAPBOX_TOKEN;
-
 function MapComp() {
   const { petsByRadius } = usePetsByRadius();
   const { selectMissingPet } = useSelectedPet();
