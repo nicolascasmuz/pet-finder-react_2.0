@@ -1,16 +1,12 @@
 {
   "name": "pet-finder-react_2.0",
-  "type": "commonjs",
   "version": "1.0.0",
   "main": "index.tsx",
   "scripts": {
     "dev:front": "cross-env NODE_ENV=development webpack",
     "dev:back": "ts-node ./backend/dev.ts",
-    "dev": "npm run dev:front && npm run dev:back",
-    "build:front": "build ./src/index.tsx",
-    "build:back": "tsc",
-    "build": "npm run build:front && npm run build:back",
-    "start": "node ./backend/index.js",
+    "build": "npm install && npm run build && tsc",
+    "start": "node ./backend/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
