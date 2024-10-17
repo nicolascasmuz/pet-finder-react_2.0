@@ -13,7 +13,8 @@ import pinMap from "../resources/pin-map.png";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./new-report-page.css";
 
-const MAPBOX_TOKEN = process.env.MAPBOX_KEY;
+const MAPBOX_TOKEN =
+  "pk.eyJ1Ijoibmljb2xhc2Nhc211eiIsImEiOiJjbGlnazg2cjExZTdvM21tcWl6eGU5bDM0In0.EtaC4N7nb_NuwfddaKZaow";
 mapboxgl.accessToken = MAPBOX_TOKEN;
 
 export function NewReportPage() {
