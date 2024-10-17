@@ -11,7 +11,7 @@ if (dev) {
 }
 
 module.exports = {
-  // mode: "development",
+  mode: process.env.REACT_APP_ENV,
   watch: dev,
   entry: "./src/index.tsx",
   module: {
@@ -52,5 +52,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
+    publicPath: "/",
   },
 };

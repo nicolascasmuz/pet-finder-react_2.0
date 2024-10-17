@@ -34,7 +34,13 @@ import { resend } from "./lib/resend";
 const port = process.env.REACT_APP_PORT || 3000;
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://pet-finder-react-2-0.onrender.com", // Ajusta esta URL al dominio de tu frontend
+    methods: ["GET", "POST", "DELETE", "PUT"],
+    credentials: true,
+  })
+);
 app.use(express.json({ limit: "50mb" }));
 
 /* sequelize.sync({ force: true }).then((res) => {
@@ -259,9 +265,10 @@ app.post("/send-mail", async (req, res) => {
   }
 });
 
-app.use(express.static(path.join(__dirname, "../build")));
+app.use(express.static(path.join(__dirname, "../dist")));
+
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build/index.html"));
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
 
 app.listen(port, console.log(`initialized on http://localhost:${port}`));
